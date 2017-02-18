@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BouncyPlatform : MonoBehaviour {
+public class BouncyPlatform : Moveable {
 
     void OnCollisionEnter2D(Collision2D other)
     {

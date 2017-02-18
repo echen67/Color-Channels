@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Door : MonoBehaviour {
+public class Door : Moveable {
 
     [Header("Enter the scene number of the scene you want to travel to")]
     public int SceneNum = 0;
