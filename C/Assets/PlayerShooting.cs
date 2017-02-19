@@ -104,4 +104,22 @@ public class PlayerShooting : MonoBehaviour {
         greenText.text = numGreen + "";
         blueText.text = numBlue + "";
     }
+
+    public void addRedInk(int input)
+    {
+        numRed = numRed + input;
+        UpdateInkDisplay();
+    }
+
+    public void addGreenInk(int input)
+    {
+        numGreen = numGreen + input;
+        UpdateInkDisplay();
+    }
+
+    public void addBlueInk(int input)
+    {
+        numBlue = numBlue + input;
+        UpdateInkDisplay();
+    }
 }

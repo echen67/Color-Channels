@@ -6,29 +6,18 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Don't touch")]
-    public float currentHealth = 25f;
-    public float maxHealth = 25f;
-    //float regenRate = 5f;
-    //float timer = 0;
+    public float currentHealth = 100f;
+    public float maxHealth = 100f;
 
     public float percent = 0;
 
-    //Use these to determine max health
-    //float level;
-    //float constant = 0.2f;
-
-    //PlayerEnergy playerEnergy;
-    //PlayerLevel playerLevel;
-    GameObject healthBar;
-    RectTransform healthBarTrans;
+    private GameObject healthBar;
+    private RectTransform healthBarTrans;
 
     void OnEnable()
     {
-        //playerLevel = gameObject.GetComponent<PlayerLevel>();
-        //playerEnergy = gameObject.GetComponent<PlayerEnergy>();
         healthBar = GameObject.FindGameObjectWithTag("Health");
         healthBarTrans = healthBar.GetComponent<RectTransform>();
-        //level = playerLevel.getLevel();
     }
 
     /*void OnLevelWasLoaded()
@@ -39,25 +28,10 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        /*timer += Time.deltaTime;
-        if (timer >= 10f)        //health regenerates every 10 ?
-        {
-            timer = 0f;
-            if (currentHealth + regenRate >= maxHealth)
-                currentHealth = maxHealth;
-            else
-                currentHealth += regenRate;
-        }*/
-        UpdateDisplay();
+        //UpdateDisplay();  //not necessary because it's called within the addhealth & takedamage methods
     }
 
-    /*public void levelUpHealth()
-    {
-        level = playerLevel.getLevel();
-        maxHealth = Mathf.Pow(level / constant, 2f);
-        currentHealth = maxHealth;
-    }*/
-
+    //Called by health pickups
     public void AddHealth(float newHealth)
     {
         currentHealth += newHealth;
@@ -65,24 +39,24 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+        UpdateDisplay();
     }
 
+    //Called by spikes or enemies
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            Debug.Log("You died");
-            currentHealth = maxHealth * .1f;
-            //playerEnergy.currentEnergy = 0;
-            //playerLevel.exp = 0;
-            //change scene to closest town BEHIND
+            currentHealth = maxHealth;
         }
+        UpdateDisplay();
     }
 
+    //Update UI element
     void UpdateDisplay()
     {
-        percent = (currentHealth * 100) / maxHealth;  //76.6f
+        percent = (currentHealth / maxHealth) * 79.5f;  //76.6f
         healthBarTrans.sizeDelta = new Vector2(100, percent);
     }
 }

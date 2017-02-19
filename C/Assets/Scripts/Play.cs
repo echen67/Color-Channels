@@ -16,9 +16,20 @@ public class Play : MonoBehaviour {
         Debug.Log("Play");
     }
 
+    void OnMouseEnter()
+    {
+        Debug.Log("mouseover");
+        gameObject.transform.localScale += new Vector3(5f, 0, 0);
+    }
+
+    void OnMouseExit()
+    {
+        gameObject.transform.localScale -= new Vector3(5f, 0, 0);
+    }
+
     void OnMouseDown()
     {
         Debug.Log("Play button clicked");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }

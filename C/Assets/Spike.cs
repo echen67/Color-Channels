@@ -6,9 +6,11 @@ public class Spike : MonoBehaviour {
 
     public float damage;
     GameObject player;
+
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
     }
+
 	void OnTriggerEnter2D(Collider2D coll)
     {
         if(coll.gameObject.tag == "Player")

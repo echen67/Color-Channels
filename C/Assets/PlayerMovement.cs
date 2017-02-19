@@ -28,7 +28,7 @@ public class PlayerMovement : Immoveable {
 	
     void Awake()
     {
-        if (self == null)
+        /*if (self == null)
         {
             DontDestroyOnLoad(gameObject);
             self = gameObject;
@@ -36,7 +36,8 @@ public class PlayerMovement : Immoveable {
         else if (self != this)
         {
             Destroy(gameObject);
-        }
+        }*/
+
         animator = GetComponent<Animator>();
     }
 

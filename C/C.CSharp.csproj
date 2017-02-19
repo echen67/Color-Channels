@@ -102,6 +102,7 @@
     <Compile Include="Assets\DimensionsManager.cs" />
     <Compile Include="Assets\Door.cs" />
     <Compile Include="Assets\EndValue.cs" />
+    <Compile Include="Assets\Enemy.cs" />
     <Compile Include="Assets\Entity.cs" />
     <Compile Include="Assets\Icey.cs" />
     <Compile Include="Assets\Immoveable.cs" />
