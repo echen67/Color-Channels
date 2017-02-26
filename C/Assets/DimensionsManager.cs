@@ -9,9 +9,32 @@ public class DimensionsManager : MonoBehaviour {
     private AudioSource channelSound;
     Camera cam;
 
-	void Start () {
+    void Awake()
+    {
         cam = mainCam.GetComponent<Camera>();
         channelSound = gameObject.GetComponent<AudioSource>();
+
+        cam.cullingMask = 127 | (1 << 8);
+
+        Physics2D.IgnoreLayerCollision(0, 8, false);
+
+        Physics2D.IgnoreLayerCollision(0, 9, true);
+        Physics2D.IgnoreLayerCollision(0, 10, true);
+        Physics2D.IgnoreLayerCollision(0, 11, true);
+
+        Physics2D.IgnoreLayerCollision(8, 9, true);
+        Physics2D.IgnoreLayerCollision(8, 10, true);
+        Physics2D.IgnoreLayerCollision(8, 11, true);
+
+        Physics2D.IgnoreLayerCollision(9, 10, true);
+        Physics2D.IgnoreLayerCollision(9, 11, true);
+
+        Physics2D.IgnoreLayerCollision(10, 11, true);
+    }
+
+	void Start () {
+        //cam = mainCam.GetComponent<Camera>();
+        //channelSound = gameObject.GetComponent<AudioSource>();
 
         //temp
         //start on red

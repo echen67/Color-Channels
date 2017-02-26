@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -51,6 +52,7 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = maxHealth;
         }
         UpdateDisplay();
+        //SceneManager.LoadScene(1);
     }
 
     //Update UI element

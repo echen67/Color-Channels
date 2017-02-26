@@ -52,6 +52,7 @@ public class PlayerShooting : MonoBehaviour {
             {
                 inkSprite.sprite = Resources.Load<Sprite>("RedInk") as Sprite;
                 numRed--;
+                //instance.layer = 8;
             }
             else if (inkColor == "green")
             {
