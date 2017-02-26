@@ -21,17 +21,6 @@ public class PlayerHealth : MonoBehaviour
         healthBarTrans = healthBar.GetComponent<RectTransform>();
     }
 
-    /*void OnLevelWasLoaded()
-    {
-        healthBar = GameObject.FindGameObjectWithTag("Health");
-        healthBarTrans = healthBar.GetComponent<RectTransform>();
-    }*/
-
-    void Update()
-    {
-        //UpdateDisplay();  //not necessary because it's called within the addhealth & takedamage methods
-    }
-
     //Called by health pickups
     public void AddHealth(float newHealth)
     {

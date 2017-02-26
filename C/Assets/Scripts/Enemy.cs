@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Enemy : Moveable {
 
+    public float movementSpeed = 1f;
     public int damageModifier = 10;
     public int health = 10;
+
+    public int timer = 0;
+    public int movementPeriod = 200;
+    public bool flag = true;
 
     public int getDamageModifier()
     {
@@ -22,6 +27,12 @@ public class Enemy : Moveable {
         health = input;
     }
 
+    void Update()
+    {
+        Movement(flag);
+    }
+
+    //hurt the player on contact
 	public virtual void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Player")
@@ -35,15 +46,40 @@ public class Enemy : Moveable {
         }
     }
 
+    //called by spikes
     public virtual void TakeDamage(int input)
     {
         health = health - input;
 
         if (health <= 0)
         {
-            //GameObject instance = Instantiate(inkCollectible, gameObject.transform.position, Quaternion.identity);
-            //instance.layer = 8;
             Destroy(gameObject);
+        }
+    }
+
+    //super basic, predictable left/right movement
+    public virtual void Movement(bool flag)
+    {
+        if (timer > 0)
+        {
+            flag = true;
+        }
+        if (timer > movementPeriod)
+        {
+            flag = false;
+        }
+        if (timer > 2 * movementPeriod)
+        {
+            timer = 0;
+        }
+        timer++;
+        if (flag)
+        {
+            transform.Translate(Vector2.right * Time.deltaTime * movementSpeed, Space.World);
+        }
+        else
+        {
+            transform.Translate(Vector2.left * Time.deltaTime * movementSpeed, Space.World);
         }
     }
 }
