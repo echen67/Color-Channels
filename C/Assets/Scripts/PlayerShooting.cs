@@ -17,7 +17,7 @@ public class PlayerShooting : MonoBehaviour {
     private int numGreen = 10;
     private int numBlue = 10;
 
-    private string inkColor = "red";
+    private InkColor inkColor = InkColor.Red;
     private PlayerMovement playerMovementScript;
 
     //get ref to ink indicator
@@ -48,20 +48,20 @@ public class PlayerShooting : MonoBehaviour {
 
             //Change the color of the ink sprite to match
             SpriteRenderer inkSprite = instance.GetComponent<SpriteRenderer>();
-            if (inkColor == "red")
+            switch(inkColor)
             {
-                inkSprite.sprite = Resources.Load<Sprite>("RedInk") as Sprite;
-                numRed--;
-            }
-            else if (inkColor == "green")
-            {
-                inkSprite.sprite = Resources.Load<Sprite>("GreenInk") as Sprite;
-                numGreen--;
-            }
-            else if (inkColor == "blue")
-            {
-                inkSprite.sprite = Resources.Load<Sprite>("BlueInk") as Sprite;
-                numBlue--;
+                case InkColor.Red:
+                    inkSprite.sprite = Resources.Load<Sprite>("RedInk") as Sprite;
+                    numRed--;
+                    break;
+                case InkColor.Green:
+                    inkSprite.sprite = Resources.Load<Sprite>("GreenInk") as Sprite;
+                    numGreen--;
+                    break;
+                case InkColor.Blue:
+                    inkSprite.sprite = Resources.Load<Sprite>("BlueInk") as Sprite;
+                    numBlue--;
+                    break;
             }
 
             UpdateInkDisplay();
@@ -84,17 +84,19 @@ public class PlayerShooting : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            inkColor = "red";
-        } else if (Input.GetKeyDown(KeyCode.W))
+            inkColor = InkColor.Red;
+        }
+        else if (Input.GetKeyDown(KeyCode.W))
         {
-            inkColor = "green";
-        } else if (Input.GetKeyDown(KeyCode.E))
+            inkColor = InkColor.Green;
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
         {
-            inkColor = "blue";
+            inkColor = InkColor.Blue;
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            inkColor = "alpha";
+            inkColor = InkColor.Alpha;
         }
     }
 

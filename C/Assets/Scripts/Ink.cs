@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ink : MonoBehaviour {
 
     public int lifetime = 200;
-    private string color = "red";
+    private InkColor color = InkColor.Red;
 
     private int timer = 0;
 
@@ -30,7 +30,7 @@ public class Ink : MonoBehaviour {
         }
     }
 
-    public void setInkColor(string input)
+    public void setInkColor(InkColor input)
     {
         color = input;
     }

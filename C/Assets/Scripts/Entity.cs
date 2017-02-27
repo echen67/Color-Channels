@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour {
 
-    public abstract bool InkHit(string color);
+    public abstract bool InkHit(InkColor color);
 }
