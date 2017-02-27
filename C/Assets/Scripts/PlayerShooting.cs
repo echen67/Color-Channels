@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour {
 
-    public GameObject bulletPrefab;
+    public GameObject bulletPrefabRed;
+    public GameObject bulletPrefabGreen;
+    public GameObject bulletPrefabBlue;
     public float shootingForce = 5;
 
     public Text redText;
@@ -40,34 +42,30 @@ public class PlayerShooting : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            //get rid of this crap and do object pooling
-            GameObject instance = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity);
-            Ink inkScript = instance.GetComponent<Ink>();
-            inkScript.setInkColor(inkColor);
-            Rigidbody2D instanceR = instance.GetComponent<Rigidbody2D>();
-
-            //Change the color of the ink sprite to match
-            SpriteRenderer inkSprite = instance.GetComponent<SpriteRenderer>();
+            //instantiate ink according to player color
+            GameObject inkPrefab = null;
             switch(inkColor)
             {
                 case InkColor.Red:
-                    inkSprite.sprite = Resources.Load<Sprite>("RedInk") as Sprite;
+                    inkPrefab = bulletPrefabRed;
                     numRed--;
                     break;
                 case InkColor.Green:
-                    inkSprite.sprite = Resources.Load<Sprite>("GreenInk") as Sprite;
+                    inkPrefab = bulletPrefabGreen;
                     numGreen--;
                     break;
                 case InkColor.Blue:
-                    inkSprite.sprite = Resources.Load<Sprite>("BlueInk") as Sprite;
+                    inkPrefab = bulletPrefabBlue;
                     numBlue--;
                     break;
             }
+            GameObject instance = Instantiate(inkPrefab, gameObject.transform.position, Quaternion.identity);
 
             UpdateInkDisplay();
 
             //decide which way to fire ink based on player's current direction
             //eventually we will replace this with shooting based on mouse clicks?
+            Rigidbody2D instanceR = instance.GetComponent<Rigidbody2D>();
             bool currentDirection = playerMovementScript.getCurrentDirection();
             if (currentDirection == false)
             {
