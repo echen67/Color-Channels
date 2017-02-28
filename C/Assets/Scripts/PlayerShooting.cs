@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour {
 
-    public GameObject bulletPrefab;
+    public GameObject bulletPrefabRed;
+    public GameObject bulletPrefabGreen;
+    public GameObject bulletPrefabBlue;
     public float shootingForce = 5;
 
     public Text redText;
@@ -17,7 +19,7 @@ public class PlayerShooting : MonoBehaviour {
     private int numGreen = 10;
     private int numBlue = 10;
 
-    private string inkColor = "red";
+    private InkColor inkColor = InkColor.Red;
     private PlayerMovement playerMovementScript;
 
     //get ref to ink indicator
@@ -40,34 +42,30 @@ public class PlayerShooting : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            //get rid of this crap and do object pooling
-            GameObject instance = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity);
-            Ink inkScript = instance.GetComponent<Ink>();
-            inkScript.setInkColor(inkColor);
-            Rigidbody2D instanceR = instance.GetComponent<Rigidbody2D>();
-
-            //Change the color of the ink sprite to match
-            SpriteRenderer inkSprite = instance.GetComponent<SpriteRenderer>();
-            if (inkColor == "red")
+            //instantiate ink according to player color
+            GameObject inkPrefab = null;
+            switch(inkColor)
             {
-                inkSprite.sprite = Resources.Load<Sprite>("RedInk") as Sprite;
-                numRed--;
+                case InkColor.Red:
+                    inkPrefab = bulletPrefabRed;
+                    numRed--;
+                    break;
+                case InkColor.Green:
+                    inkPrefab = bulletPrefabGreen;
+                    numGreen--;
+                    break;
+                case InkColor.Blue:
+                    inkPrefab = bulletPrefabBlue;
+                    numBlue--;
+                    break;
             }
-            else if (inkColor == "green")
-            {
-                inkSprite.sprite = Resources.Load<Sprite>("GreenInk") as Sprite;
-                numGreen--;
-            }
-            else if (inkColor == "blue")
-            {
-                inkSprite.sprite = Resources.Load<Sprite>("BlueInk") as Sprite;
-                numBlue--;
-            }
+            GameObject instance = Instantiate(inkPrefab, gameObject.transform.position, Quaternion.identity);
 
             UpdateInkDisplay();
 
             //decide which way to fire ink based on player's current direction
             //eventually we will replace this with shooting based on mouse clicks?
+            Rigidbody2D instanceR = instance.GetComponent<Rigidbody2D>();
             bool currentDirection = playerMovementScript.getCurrentDirection();
             if (currentDirection == false)
             {
@@ -84,17 +82,19 @@ public class PlayerShooting : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            inkColor = "red";
-        } else if (Input.GetKeyDown(KeyCode.W))
+            inkColor = InkColor.Red;
+        }
+        else if (Input.GetKeyDown(KeyCode.W))
         {
-            inkColor = "green";
-        } else if (Input.GetKeyDown(KeyCode.E))
+            inkColor = InkColor.Green;
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
         {
-            inkColor = "blue";
+            inkColor = InkColor.Blue;
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            inkColor = "alpha";
+            inkColor = InkColor.Alpha;
         }
     }
 

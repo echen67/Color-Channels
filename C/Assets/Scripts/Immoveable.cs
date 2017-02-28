@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Immoveable : Entity {
 
-	public override bool InkHit(string color)
+	public override bool InkHit(InkColor color)
     {
         return false;
     }

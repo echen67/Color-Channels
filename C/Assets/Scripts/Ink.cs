@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ink : MonoBehaviour {
 
     public int lifetime = 200;
-    private string color = "red";
+    public InkColor color = InkColor.Red;
 
     private int timer = 0;
 
@@ -22,15 +22,19 @@ public class Ink : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D coll)
     {
         Entity move = coll.gameObject.GetComponent<Entity>();
-
-        bool shouldDestroy = move.InkHit(color);
-        if (shouldDestroy)
+        
+        //make sure collision is with an entity
+        if(move != null)
         {
-            Destroy(gameObject);
+            bool shouldDestroy = move.InkHit(color);
+            if(shouldDestroy)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
-    public void setInkColor(string input)
+    public void setInkColor(InkColor input)
     {
         color = input;
     }

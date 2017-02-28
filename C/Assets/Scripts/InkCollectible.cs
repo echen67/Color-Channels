@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InkCollectible : MonoBehaviour {
 
-    public string color = "red";
+    public InkColor color = InkColor.Red;
     public int number = 1;
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -12,15 +12,17 @@ public class InkCollectible : MonoBehaviour {
         if(coll.gameObject.tag == "Player")
         {
             PlayerShooting shootingScript = coll.GetComponent<PlayerShooting>();
-            if(color == "red")
+            switch(color)
             {
-                shootingScript.addRedInk(number);
-            } else if (color == "green")
-            {
-                shootingScript.addGreenInk(number);
-            } else if (color == "blue")
-            {
-                shootingScript.addBlueInk(number);
+                case InkColor.Red:
+                    shootingScript.addRedInk(number);
+                    break;
+                case InkColor.Green:
+                    shootingScript.addGreenInk(number);
+                    break;
+                case InkColor.Blue:
+                    shootingScript.addBlueInk(number);
+                    break;
             }
 
             Destroy(gameObject);
