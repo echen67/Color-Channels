@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spike : Moveable {
+public class Spike : Colorable {
 
     public int damage;
     private int health = 10;
@@ -18,6 +18,7 @@ public class Spike : Moveable {
         {
             Destroy(gameObject);
         }
+        setColor();
     }
 
 	void OnTriggerEnter2D(Collider2D coll)
