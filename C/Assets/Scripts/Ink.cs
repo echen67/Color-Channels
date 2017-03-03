@@ -11,7 +11,6 @@ public class Ink : MonoBehaviour {
 
     void Update()
     {
-        //do object pooling instead
         if(timer > lifetime)
         {
             Destroy(gameObject);

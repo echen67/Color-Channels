@@ -6,7 +6,6 @@ public class Moveable : Entity {
 
 	public override bool InkHit(InkColor inkColor)
     {
-        Debug.Log("InkHit called");
         //each type of entity will override this
         //for example, platforms, spikes, and enemies will actually change channels, while doors and black platforms won't
         switch(inkColor)

@@ -9,15 +9,15 @@ public class Timed : MonoBehaviour {
     bool start2 = false;
     float timeLeft = 3.0f;
 
-    private void Start() {
-        gameObject.GetComponent<AudioSource>();
+    void Start() {
+        timerSound = gameObject.GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter2D(Collision2D other) {
         start1 = true;
     }
 
-    private void Update() {
+    void Update() {
         if (start1) {
             timeLeft -= Time.deltaTime;
             if (!start2) {

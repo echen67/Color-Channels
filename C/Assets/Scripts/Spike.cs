@@ -10,6 +10,7 @@ public class Spike : Colorable {
 
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
+        setColor();
     }
 
     void Update()
@@ -18,7 +19,7 @@ public class Spike : Colorable {
         {
             Destroy(gameObject);
         }
-        setColor();
+        setColor(); //
     }
 
 	void OnTriggerEnter2D(Collider2D coll)
@@ -31,6 +32,7 @@ public class Spike : Colorable {
             coll.gameObject.GetComponent<Animator>().SetBool("Hurt", true);
             ph.TakeDamage(damage);
         }
+        //Spikes hurt enemies, but enemies also hurt spikes 
         if (coll.gameObject.tag == "Enemy")
         {
             Enemy enemyScript = coll.gameObject.GetComponent<Enemy>();

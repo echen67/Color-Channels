@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyInk : Enemy {
 
+    //An enemy that drops ink upon death
+
     public GameObject inkCollectible;
 
     public override void TakeDamage(int input)
