@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Moveable {
+public abstract class Enemy : Colorable {
 
     public float movementSpeed = 1f;
     public int damageModifier = 10;

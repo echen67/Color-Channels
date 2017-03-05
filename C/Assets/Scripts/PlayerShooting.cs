@@ -14,19 +14,20 @@ public class PlayerShooting : MonoBehaviour {
     public Text greenText;
     public Text blueText;
 
+    private Ink inkScript;
+
     //how many bottles of each ink color you have left
     private int numRed = 10;
     private int numGreen = 10;
     private int numBlue = 10;
 
-    private InkColor inkColor = InkColor.Red;
+    public InkColor inkColor = InkColor.Red;
     private PlayerMovement playerMovementScript;
 
     //get ref to ink indicator
-    //get ref to each of the ink bottle ui elements
-
 	void Start () {
         playerMovementScript = gameObject.GetComponent<PlayerMovement>();
+        //inkScript = bulletPrefabRed.GetComponent<Ink>();
 
         redText.text = numRed + "";
         greenText.text = numGreen + "";
@@ -34,12 +35,13 @@ public class PlayerShooting : MonoBehaviour {
 	}
 	
 	void Update () {
-        ShootInk();
         ChangeInkColor();
+        ShootInk();
 	}
 
     void ShootInk()
     {
+        //ChangeInkColor();
         if (Input.GetKeyDown(KeyCode.A))
         {
             //instantiate ink according to player color
@@ -61,8 +63,13 @@ public class PlayerShooting : MonoBehaviour {
             }
             GameObject instance = Instantiate(inkPrefab, gameObject.transform.position, Quaternion.identity);
 
+            //GameObject instance = Instantiate(bulletPrefabRed, gameObject.transform.position, Quaternion.identity);
+            //inkScript = bulletPrefabRed.GetComponent<Ink>();
+            //inkScript.setInkColor(inkColor);
+
             UpdateInkDisplay();
 
+            //FIX THIS SO THAT YOU ONLY NEED ONE BULLET PREFAB
             //decide which way to fire ink based on player's current direction
             //eventually we will replace this with shooting based on mouse clicks?
             Rigidbody2D instanceR = instance.GetComponent<Rigidbody2D>();

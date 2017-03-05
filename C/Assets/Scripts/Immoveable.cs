@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Immoveable : Entity {
 
+    //deprecated
+
 	public override bool InkHit(InkColor color)
     {
-        return false;
+        return true;
     }
 }
