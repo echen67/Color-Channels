@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : Immoveable {
+public class PlayerMovement : MonoBehaviour {
     Animator animator;
 
     public float playerSpeed;

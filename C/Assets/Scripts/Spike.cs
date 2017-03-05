@@ -24,6 +24,7 @@ public class Spike : Colorable {
 
 	void OnTriggerEnter2D(Collider2D coll)
     {
+           //push player back, hurt them
         if(coll.gameObject.tag == "Player")
         {
             PlayerHealth ph = coll.gameObject.GetComponent<PlayerHealth>();

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour {
 
+    //CHANGE THIS SO THAT DAMAGE IS TAKEN EVERY FEW SECONDS OR SO
     public int damage = 1;
+    public float period = 1;
 
 	void OnTriggerStay2D(Collider2D other)
     {
