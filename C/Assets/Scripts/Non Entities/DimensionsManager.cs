@@ -10,7 +10,7 @@ public class DimensionsManager : MonoBehaviour {
     //Cam culling mask
     //Changing color of the health bar
 
-    public int startingChannel = 1;
+    //public int startingChannel = 1;
     public GameObject mainCam;
 
     private GameObject healthBar;
@@ -27,25 +27,26 @@ public class DimensionsManager : MonoBehaviour {
         healthBarTexture = healthBar.GetComponent<RawImage>();
         healthBarTexture.color = new Color(0.6F, .1F, .1F);
 
+        //start on red channel
         cam.cullingMask = 127 | (1 << 8);
 
         Physics2D.IgnoreLayerCollision(0, 8, false);
 
+        //ignore collisions between default and other channels
         Physics2D.IgnoreLayerCollision(0, 9, true);
         Physics2D.IgnoreLayerCollision(0, 10, true);
         Physics2D.IgnoreLayerCollision(0, 11, true);
 
+        //ignore collisions between different channels
         Physics2D.IgnoreLayerCollision(8, 9, true);
         Physics2D.IgnoreLayerCollision(8, 10, true);
         Physics2D.IgnoreLayerCollision(8, 11, true);
-
         Physics2D.IgnoreLayerCollision(9, 10, true);
         Physics2D.IgnoreLayerCollision(9, 11, true);
-
         Physics2D.IgnoreLayerCollision(10, 11, true);
     }
 
-	void Start () {
+	/*void Start () {
         //temp
         //start on red
         cam.cullingMask = 127 | (1 << 8);
@@ -55,7 +56,7 @@ public class DimensionsManager : MonoBehaviour {
         Physics2D.IgnoreLayerCollision(0, 9, true);
         Physics2D.IgnoreLayerCollision(0, 10, true);
         Physics2D.IgnoreLayerCollision(0, 11, true);
-    }
+    }*/
 	
 	void Update () {
         //red = layer 8

@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Door : Entity {
 
-    bool unlock = false;
+    public bool unlock = false;
+
+    [Header("The number of times the door needs to be hit to be unlocked")]
     public int numToUnlock = 1;     //the number of times the door needs to be hit to be unlocked
 
     [Header("Enter the scene number of the scene you want to travel to")]

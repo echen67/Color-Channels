@@ -6,8 +6,8 @@ public class Ink : MonoBehaviour {
 
     public int lifetime = 200;
     public InkColor color = InkColor.Red;
-    private SpriteRenderer sr;
 
+    private SpriteRenderer sr;
     private int timer = 0;
 
     void Start()
@@ -42,7 +42,7 @@ public class Ink : MonoBehaviour {
         }
     }
 
-    //called by PlayerShooting script
+    //currently unused
     public void setInkColor(InkColor input)
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
