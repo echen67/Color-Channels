@@ -1,18 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DimensionsManager : MonoBehaviour {
 
+    //Things that DimensionManager is responsible for:
+    //Layer collisions
+    //Cam culling mask
+    //Changing color of the health bar
+
     public int startingChannel = 1;
     public GameObject mainCam;
+
+    private GameObject healthBar;
+    private RawImage healthBarTexture;
     private AudioSource channelSound;
-    Camera cam;
+    private Camera cam;
 
     void Awake()
     {
         cam = mainCam.GetComponent<Camera>();
         channelSound = gameObject.GetComponent<AudioSource>();
+
+        healthBar = GameObject.FindGameObjectWithTag("Health");
+        healthBarTexture = healthBar.GetComponent<RawImage>();
+        healthBarTexture.color = new Color(0.6F, .1F, .1F);
 
         cam.cullingMask = 127 | (1 << 8);
 
@@ -33,9 +46,6 @@ public class DimensionsManager : MonoBehaviour {
     }
 
 	void Start () {
-        //cam = mainCam.GetComponent<Camera>();
-        //channelSound = gameObject.GetComponent<AudioSource>();
-
         //temp
         //start on red
         cam.cullingMask = 127 | (1 << 8);
@@ -65,6 +75,8 @@ public class DimensionsManager : MonoBehaviour {
             Physics2D.IgnoreLayerCollision(0, 10, true);
             Physics2D.IgnoreLayerCollision(0, 11, true);
 
+            healthBarTexture.color = new Color(0.6F, .1F, .1F);
+
             channelSound.Play();
         }
 
@@ -78,6 +90,8 @@ public class DimensionsManager : MonoBehaviour {
             Physics2D.IgnoreLayerCollision(0, 8, true);
             Physics2D.IgnoreLayerCollision(0, 10, true);
             Physics2D.IgnoreLayerCollision(0, 11, true);
+
+            healthBarTexture.color = new Color(0.1F, .6F, .1F);
 
             channelSound.Play();
         }
@@ -93,6 +107,8 @@ public class DimensionsManager : MonoBehaviour {
             Physics2D.IgnoreLayerCollision(0, 9, true);
             Physics2D.IgnoreLayerCollision(0, 11, true);
 
+            healthBarTexture.color = new Color(0.1F, .1F, .6F);
+
             channelSound.Play();
         }
 
@@ -106,6 +122,8 @@ public class DimensionsManager : MonoBehaviour {
             Physics2D.IgnoreLayerCollision(0, 8, true);
             Physics2D.IgnoreLayerCollision(0, 9, true);
             Physics2D.IgnoreLayerCollision(0, 10, true);
+
+            healthBarTexture.color = new Color(0.5F, .5F, .5F);
 
             channelSound.Play();
         }

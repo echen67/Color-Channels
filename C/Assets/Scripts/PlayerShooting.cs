@@ -5,14 +5,26 @@ using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour {
 
+    //Things PlayerShooting is responsible for:
+    //Keeping the number of ink you  have left
+    //Setting the ink indicator to the correct position
+
+    public GameObject inkIndicator;
+    public GameObject redBottle;
+    public GameObject greenBottle;
+    public GameObject blueBottle;
+    public GameObject alphaBottle;
+
     public GameObject bulletPrefabRed;
     public GameObject bulletPrefabGreen;
     public GameObject bulletPrefabBlue;
+    public GameObject bulletPrefabAlpha;
     public float shootingForce = 5;
 
     public Text redText;
     public Text greenText;
     public Text blueText;
+    public Text alphaText;
 
     private Ink inkScript;
 
@@ -20,6 +32,7 @@ public class PlayerShooting : MonoBehaviour {
     private int numRed = 10;
     private int numGreen = 10;
     private int numBlue = 10;
+    private int numAlpha = 10;
 
     public InkColor inkColor = InkColor.Red;
     private PlayerMovement playerMovementScript;
@@ -27,11 +40,14 @@ public class PlayerShooting : MonoBehaviour {
     //get ref to ink indicator
 	void Start () {
         playerMovementScript = gameObject.GetComponent<PlayerMovement>();
-        //inkScript = bulletPrefabRed.GetComponent<Ink>();
+
+        inkIndicator.transform.SetParent(redBottle.transform, false);
+        inkIndicator.transform.SetAsFirstSibling();
 
         redText.text = numRed + "";
         greenText.text = numGreen + "";
         blueText.text = numBlue + "";
+        alphaText.text = numAlpha + "";
 	}
 	
 	void Update () {
@@ -41,6 +57,7 @@ public class PlayerShooting : MonoBehaviour {
 
     void ShootInk()
     {
+        //FIX THIS SO THAT YOU ONLY NEED ONE BULLET PREFAB?
         //ChangeInkColor();
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -60,6 +77,10 @@ public class PlayerShooting : MonoBehaviour {
                     inkPrefab = bulletPrefabBlue;
                     numBlue--;
                     break;
+                case InkColor.Alpha:
+                    inkPrefab = bulletPrefabAlpha;
+                    numAlpha--;
+                    break;
             }
             GameObject instance = Instantiate(inkPrefab, gameObject.transform.position, Quaternion.identity);
 
@@ -69,7 +90,6 @@ public class PlayerShooting : MonoBehaviour {
 
             UpdateInkDisplay();
 
-            //FIX THIS SO THAT YOU ONLY NEED ONE BULLET PREFAB
             //decide which way to fire ink based on player's current direction
             //eventually we will replace this with shooting based on mouse clicks?
             Rigidbody2D instanceR = instance.GetComponent<Rigidbody2D>();
@@ -90,18 +110,26 @@ public class PlayerShooting : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             inkColor = InkColor.Red;
+            inkIndicator.transform.SetParent(redBottle.transform, false);
+            inkIndicator.transform.SetAsFirstSibling();
         }
         else if (Input.GetKeyDown(KeyCode.W))
         {
             inkColor = InkColor.Green;
+            inkIndicator.transform.SetParent(greenBottle.transform, false);
+            inkIndicator.transform.SetAsFirstSibling();
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
             inkColor = InkColor.Blue;
+            inkIndicator.transform.SetParent(blueBottle.transform, false);
+            inkIndicator.transform.SetAsFirstSibling();
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
             inkColor = InkColor.Alpha;
+            inkIndicator.transform.SetParent(alphaBottle.transform, false);
+            inkIndicator.transform.SetAsFirstSibling();
         }
     }
 
@@ -110,6 +138,7 @@ public class PlayerShooting : MonoBehaviour {
         redText.text = numRed + "";
         greenText.text = numGreen + "";
         blueText.text = numBlue + "";
+        alphaText.text = numAlpha + "";
     }
 
     public void addRedInk(int input)
@@ -127,6 +156,12 @@ public class PlayerShooting : MonoBehaviour {
     public void addBlueInk(int input)
     {
         numBlue = numBlue + input;
+        UpdateInkDisplay();
+    }
+
+    public void addAlphaInk(int input)
+    {
+        numAlpha = numAlpha + input;
         UpdateInkDisplay();
     }
 }
