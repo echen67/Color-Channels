@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
+    // <summary>
+    //    Affects how quickly the player slides on icy platforms. The higher
+    //    the constant, the longer the slide.
+    // </summary>
     private int SLIDING_CONSTANT = 50;
 
     Animator animator;
@@ -158,20 +162,22 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     /**
-     * Sets whether the player is sliding or not.
-     *
-     * <param name="isSliding"> Whether or not the player is sliding. </param>
+     <summary>
+       Sets whether the player is sliding or not.
+     </summary>
+     <param name="isSliding"> Whether or not the player is sliding. </param>
      */
     public void setSlide(bool isSliding) {
         sliding = isSliding;
     }
 
     /**
-     * Slides the player using a value that approaches zero to multiply against their
-     * translation transformation.
-     *
-     * <param name="slideValue"> The factor by which the trnasformation is multiplied. </param>
-     * <returns> The updated slide value, now closer to zero. </returns>
+     <summary>
+       Slides the player using a value that approaches zero to multiply against their
+       translation transformation.
+     </summary>
+     <param name="slideValue"> The factor by which the trnasformation is multiplied. </param>
+     <returns> The updated slide value, now closer to zero. </returns>
      */
     private int slide(int slideValue) {
         float multiplier = (float) slideValue / (SLIDING_CONSTANT * 1.1f);

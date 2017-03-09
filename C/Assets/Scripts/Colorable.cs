@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ <summary>
+   An abstract class that changes the color of its inheritor's sprite
+   based on the color channel (layer) that it is currently on.
+ </summary>
+ **/
 public abstract class Colorable : Moveable {
 
     public void setColor() {
