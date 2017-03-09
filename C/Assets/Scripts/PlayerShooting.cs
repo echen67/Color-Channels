@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour {
 
     //Things PlayerShooting is responsible for:
-    //Keeping the number of ink you  have left
+    //Keeping the number of ink you have left
     //Setting the ink indicator to the correct position
 
     public GameObject inkIndicator;
@@ -37,9 +37,12 @@ public class PlayerShooting : MonoBehaviour {
     public InkColor inkColor = InkColor.Red;
     private PlayerMovement playerMovementScript;
 
+    private Pause pauseScript;
+
     //get ref to ink indicator
 	void Start () {
         playerMovementScript = gameObject.GetComponent<PlayerMovement>();
+        pauseScript = GameObject.FindGameObjectWithTag("Dimensions").GetComponent<Pause>();
 
         inkIndicator.transform.SetParent(redBottle.transform, false);
         inkIndicator.transform.SetAsFirstSibling();
@@ -59,7 +62,8 @@ public class PlayerShooting : MonoBehaviour {
     {
         //FIX THIS SO THAT YOU ONLY NEED ONE BULLET PREFAB?
         //ChangeInkColor();
-        if (Input.GetKeyDown(KeyCode.A))
+        bool isPaused = pauseScript.isPaused;
+        if (Input.GetKeyDown(KeyCode.A) && !isPaused)       //you can only shoot if game is not paused
         {
             //instantiate ink according to player color
             GameObject inkPrefab = null;
@@ -107,25 +111,26 @@ public class PlayerShooting : MonoBehaviour {
 
     void ChangeInkColor()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        bool isPaused = pauseScript.isPaused;
+        if (Input.GetKeyDown(KeyCode.Q) && !isPaused)
         {
             inkColor = InkColor.Red;
             inkIndicator.transform.SetParent(redBottle.transform, false);
             inkIndicator.transform.SetAsFirstSibling();
         }
-        else if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKeyDown(KeyCode.W) && !isPaused)
         {
             inkColor = InkColor.Green;
             inkIndicator.transform.SetParent(greenBottle.transform, false);
             inkIndicator.transform.SetAsFirstSibling();
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.E) && !isPaused)
         {
             inkColor = InkColor.Blue;
             inkIndicator.transform.SetParent(blueBottle.transform, false);
             inkIndicator.transform.SetAsFirstSibling();
         }
-        else if (Input.GetKeyDown(KeyCode.R))
+        else if (Input.GetKeyDown(KeyCode.R) && !isPaused)
         {
             inkColor = InkColor.Alpha;
             inkIndicator.transform.SetParent(alphaBottle.transform, false);

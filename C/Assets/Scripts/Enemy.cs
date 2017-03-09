@@ -27,13 +27,25 @@ public abstract class Enemy : Colorable {
         health = input;
     }
 
+    void Start()
+    {
+        base.setColor();
+    }
+
     void Update()
     {
         Movement(flag);
     }
 
+    public override bool InkHit(InkColor inkColor)
+    {
+        bool ans = base.InkHit(inkColor);
+        base.setColor();
+        return ans;
+    }
+
     //hurt the player on contact
-	public virtual void OnCollisionEnter2D(Collision2D coll)
+    public virtual void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Player")
         {
