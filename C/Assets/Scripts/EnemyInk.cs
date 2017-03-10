@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EnemyInk : Enemy {
 
+    //deprecated
+
     //An enemy that drops ink upon death
 
-    public GameObject inkCollectible;
+    //public GameObject inkCollectible;
 
-    public override void TakeDamage(int input)
+    /*public override void TakeDamage(int input)
     {
         health = health - input;
 
@@ -18,5 +20,5 @@ public class EnemyInk : Enemy {
             instance.layer = 8;
             Destroy(gameObject);
         }
-    }
+    }*/
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Enemy : Colorable {
 
+    public GameObject inkCollectible;
+
     public float movementSpeed = 1f;
     public int damageModifier = 10;
     public int health = 10;
@@ -11,6 +13,8 @@ public abstract class Enemy : Colorable {
     public int timer = 0;
     public int movementPeriod = 200;
     public bool flag = true;
+
+    private bool die = false;
 
     public int getDamageModifier()
     {
@@ -35,12 +39,21 @@ public abstract class Enemy : Colorable {
     void Update()
     {
         Movement(flag);
+        if (die)
+        {
+            StartCoroutine("EnemyDeath");
+        }
     }
 
     public override bool InkHit(InkColor inkColor)
     {
         bool ans = base.InkHit(inkColor);
         base.setColor();
+        //update color of particles
+        Transform child = gameObject.transform.GetChild(0);
+        ParticleSystem ps = child.GetComponent<ParticleSystem>();
+        ParticleSystemRenderer psr = child.GetComponent<ParticleSystemRenderer>();
+
         return ans;
     }
 
@@ -65,7 +78,28 @@ public abstract class Enemy : Colorable {
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            //die = true;
+            StartCoroutine("EnemyDeath");
+            //Destroy(gameObject);
+        }
+    }
+
+    IEnumerator EnemyDeath()
+    {
+        for (float i = 1f; i >= 0; i -= 0.1f)
+        {
+            Debug.Log(i);
+            if (i <= 0.1f)
+            {
+                GameObject instance = Instantiate(inkCollectible, gameObject.transform.position, Quaternion.identity);
+                instance.layer = 8;
+                Destroy(gameObject);
+            }
+            SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
+            Color c = sr.color;
+            c.a = i;
+            sr.color = c;
+            yield return new WaitForSeconds(.1f);
         }
     }
 

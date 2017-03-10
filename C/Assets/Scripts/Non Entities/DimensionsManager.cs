@@ -13,6 +13,9 @@ public class DimensionsManager : MonoBehaviour {
     //public int startingChannel = 1;
     public GameObject mainCam;
 
+    private Pause pauseScript;
+    private bool isPaused;
+
     public int playerLayer = 8;
 
     private GameObject healthBar;
@@ -24,6 +27,8 @@ public class DimensionsManager : MonoBehaviour {
     {
         cam = mainCam.GetComponent<Camera>();
         channelSound = gameObject.GetComponent<AudioSource>();
+        pauseScript = gameObject.GetComponent<Pause>();
+        //isPaused = pauseScript.isPaused;
 
         healthBar = GameObject.FindGameObjectWithTag("Health");
         healthBarTexture = healthBar.GetComponent<RawImage>();
@@ -61,8 +66,10 @@ public class DimensionsManager : MonoBehaviour {
     }*/
 	
 	void Update () {
+        isPaused = pauseScript.isPaused;
+
         //red = layer 8
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && !isPaused)
         {
             cam.cullingMask = 127 | (1 << 8);
 
@@ -86,7 +93,7 @@ public class DimensionsManager : MonoBehaviour {
         }
 
         //green = layer 9
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && !isPaused)
         {
             cam.cullingMask = 127 | (1 << 9);
 
@@ -104,7 +111,7 @@ public class DimensionsManager : MonoBehaviour {
         }
 
         //blue = layer 10
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3) && !isPaused)
         {
             cam.cullingMask = 127 | (1 << 10);
 
@@ -122,7 +129,7 @@ public class DimensionsManager : MonoBehaviour {
         }
 
         //alpha = layer 11
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha4) && !isPaused)
         {
             cam.cullingMask = 127 | (1 << 11);
 

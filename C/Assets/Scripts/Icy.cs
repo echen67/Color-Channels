@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Icey : Moveable {
+public class Icy : Moveable {
+
+    //no longer needed, code moved to general platform script
 
     // When player touches an icy platform.
     void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.tag == "Player") {
-            PlayerMovement moveCtrl = other.gameObject
-                .GetComponent(typeof(PlayerMovement)) as PlayerMovement;
+            PlayerMovement moveCtrl = other.gameObject.GetComponent<PlayerMovement>();
             moveCtrl.setSlide(true);
         }
     }
@@ -17,7 +18,7 @@ public class Icey : Moveable {
     void OnCollisionExit2D(Collision2D other) {
         if (other.gameObject.tag == "Player") {
             PlayerMovement moveCtrl = other.gameObject
-                .GetComponent(typeof(PlayerMovement)) as PlayerMovement;
+                .GetComponent<PlayerMovement>();
             moveCtrl.setSlide(false);
         }
     }

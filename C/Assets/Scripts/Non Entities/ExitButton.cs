@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Credits : MonoBehaviour {
-
-    public GameObject creditsPanel;
+public class ExitButton : MonoBehaviour {
 
     void OnMouseEnter()
     {
@@ -18,11 +16,11 @@ public class Credits : MonoBehaviour {
 
     /*void OnMouseDown()
     {
-        //open credits panel
+        Application.Quit();
     }*/
 
-    public void CreditsClicked()
+    public void ExitClicked()
     {
-
+        Application.Quit();
     }
 }
