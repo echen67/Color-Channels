@@ -10,7 +10,7 @@ using UnityEngine;
  **/
 public abstract class Colorable : Moveable {
 
-    public void setColor() {
+    public virtual void setColor() {
         SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
         if (gameObject.layer == 8) {
             // Red tint

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Spike : Colorable {
 
+    public InkColor spikeColor = InkColor.Red;
     public int damage;
     private int health = 10;
     GameObject player;
 
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
+        InkHit(spikeColor);
         setColor();
     }
 

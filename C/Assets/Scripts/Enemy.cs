@@ -4,7 +4,11 @@ using UnityEngine;
 
 public abstract class Enemy : Colorable {
 
-    public GameObject inkCollectible;
+    public InkColor enemyColor = InkColor.Red;
+    public GameObject redCollectible;
+    public GameObject greenCollectible;
+    public GameObject blueCollectible;
+    public GameObject alphaCollectible;
 
     public float movementSpeed = 1f;
     public int damageModifier = 10;
@@ -33,6 +37,7 @@ public abstract class Enemy : Colorable {
 
     void Start()
     {
+        InkHit(enemyColor);
         base.setColor();
     }
 
@@ -45,8 +50,10 @@ public abstract class Enemy : Colorable {
         }
     }
 
+    //the ink droplet calls this method and passes in the ink color
     public override bool InkHit(InkColor inkColor)
     {
+        enemyColor = inkColor;
         bool ans = base.InkHit(inkColor);
         base.setColor();
         //update color of particles
@@ -91,8 +98,25 @@ public abstract class Enemy : Colorable {
             Debug.Log(i);
             if (i <= 0.1f)
             {
-                GameObject instance = Instantiate(inkCollectible, gameObject.transform.position, Quaternion.identity);
-                instance.layer = 8;
+                switch (enemyColor)
+                {
+                    case InkColor.Red:
+                        GameObject redInstance = Instantiate(redCollectible, gameObject.transform.position, Quaternion.identity);
+                        redInstance.layer = 8;
+                        break;
+                    case InkColor.Green:
+                        GameObject greenInstance = Instantiate(greenCollectible, gameObject.transform.position, Quaternion.identity);
+                        greenInstance.layer = 9;
+                        break;
+                    case InkColor.Blue:
+                        GameObject blueInstance = Instantiate(blueCollectible, gameObject.transform.position, Quaternion.identity);
+                        blueInstance.layer = 10;
+                        break;
+                    case InkColor.Alpha:
+                        GameObject alphaInstance = Instantiate(alphaCollectible, gameObject.transform.position, Quaternion.identity);
+                        alphaInstance.layer = 11;
+                        break;
+                }
                 Destroy(gameObject);
             }
             SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();

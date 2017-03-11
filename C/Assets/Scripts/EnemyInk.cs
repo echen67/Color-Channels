@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyInk : Enemy {
 
     //deprecated
+    //simply use enemy instead
 
     //An enemy that drops ink upon death
 

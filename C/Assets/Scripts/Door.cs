@@ -19,6 +19,8 @@ public class Door : Entity {
         if (numToUnlock <= 0)
         {
             unlock = true;
+            GameObject locked = gameObject.transform.GetChild(0).gameObject;
+            Destroy(locked);
         }
         return true;
     }
