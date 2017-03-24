@@ -1,8 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
+
+    // <summary>
+    //    Affects how quickly the player slides on icy platforms. The higher
+    //    the constant, the longer the slide.
+    // </summary>
+    private int SLIDING_CONSTANT = 50;
+
     Animator animator;
 
     public float playerSpeed;
@@ -19,10 +27,13 @@ public class PlayerMovement : MonoBehaviour {
     private bool jumping = false;
     private int doubleJump = 0;
 
+    private bool sliding = false;
+    private int slideVal = 0;
+
     private Rigidbody2D body2D;
 
     private AudioSource jumpSound;
-	
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -66,9 +77,12 @@ public class PlayerMovement : MonoBehaviour {
         //Animation Handling
 
         Walking();
+        if (slideVal != 0) {
+            slideVal = slide(slideVal);
+        }
         Jumping();
 
-        
+
     }
 
     void Walking()
@@ -77,6 +91,7 @@ public class PlayerMovement : MonoBehaviour {
         bool hurt = animator.GetBool("Hurt");
         if (Input.GetKey(KeyCode.RightArrow) && !hurt)
         {
+            slideVal = 0; //Resets sliding value once you start walking again
             animator.SetBool("running", true);
             transform.Translate(Vector2.right * Time.deltaTime * playerSpeed, Space.World);
             //body2D.velocity = new Vector2(Vector2.right.x * playerSpeed, body2D.velocity.y);
@@ -86,6 +101,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.LeftArrow) && !hurt)
         {
+            slideVal = 0; //Resets sliding value once you start walking again
             animator.SetBool("running", true);
             transform.Translate(Vector2.left * Time.deltaTime * playerSpeed, Space.World);
             //body2D.velocity = new Vector2(Vector2.left.x * playerSpeed, body2D.velocity.y);
@@ -103,11 +119,17 @@ public class PlayerMovement : MonoBehaviour {
         //Stop walking left and right
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
+            if (sliding) {
+                slideVal = SLIDING_CONSTANT * -1;
+            }
             walking = false;
         }
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
+            if (sliding) {
+                slideVal = SLIDING_CONSTANT;
+            }
             walking = false;
         }
     }
@@ -137,5 +159,35 @@ public class PlayerMovement : MonoBehaviour {
     public bool getCurrentDirection()
     {
         return currentDirection;
+    }
+
+    /**
+     <summary>
+       Sets whether the player is sliding or not.
+     </summary>
+     <param name="isSliding"> Whether or not the player is sliding. </param>
+     */
+    public void setSlide(bool isSliding) {
+        sliding = isSliding;
+    }
+
+    /**
+     <summary>
+       Slides the player using a value that approaches zero to multiply against their
+       translation transformation.
+     </summary>
+     <param name="slideValue"> The factor by which the trnasformation is multiplied. </param>
+     <returns> The updated slide value, now closer to zero. </returns>
+     */
+    private int slide(int slideValue) {
+        float multiplier = (float) slideValue / (SLIDING_CONSTANT * 1.1f);
+        transform.Translate(Vector2.right * Time.deltaTime * playerSpeed
+            * multiplier, Space.World);
+        if (slideValue > 0) {
+            slideValue -= 1;
+        } else if (slideValue < 0) {
+            slideValue += 1;
+        }
+        return slideValue;
     }
 }

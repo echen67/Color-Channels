@@ -3,22 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class Play : MonoBehaviour {
-    
-	void Start () {
-        Button btn = gameObject.GetComponent<Button>();
-        btn.onClick.AddListener(PlayClicked);
-	}
-	
-	void PlayClicked()
-    {
-        Debug.Log("Play");
-    }
 
     void OnMouseEnter()
     {
-        Debug.Log("mouseover");
         gameObject.transform.localScale += new Vector3(5f, 0, 0);
     }
 
@@ -27,9 +17,15 @@ public class Play : MonoBehaviour {
         gameObject.transform.localScale -= new Vector3(5f, 0, 0);
     }
 
-    void OnMouseDown()
+    /*void OnMouseDown()
     {
-        Debug.Log("Play button clicked");
+        SceneManager.LoadScene(1);
+    }*/
+
+    public void PlayClicked()
+    {
+        AudioSource audio = gameObject.GetComponent<AudioSource>();
+        audio.Play();
         SceneManager.LoadScene(1);
     }
 }

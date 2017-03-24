@@ -72,6 +72,13 @@ public class Platform : Colorable {
             other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 10, ForceMode2D.Impulse);
         }
 
+        //for icy platforms
+        if (other.gameObject.tag == "Player" && inkColor == InkColor.Blue)
+        {
+            PlayerMovement moveCtrl = other.gameObject.GetComponent<PlayerMovement>();
+            moveCtrl.setSlide(true);
+        }
+
         //for timed platforms
         if (inkColor == InkColor.Alpha)
         {
@@ -79,12 +86,14 @@ public class Platform : Colorable {
         }
     }
 
-    //Implement Icey
-    public void Icey()
+    //for icy platforms
+    void OnCollisionExit2D(Collision2D other)
     {
-        if (inkColor == InkColor.Blue)
+        if (other.gameObject.tag == "Player" && inkColor == InkColor.Blue)
         {
-            //
+            PlayerMovement moveCtrl = other.gameObject
+                .GetComponent<PlayerMovement>();
+            moveCtrl.setSlide(false);
         }
     }
 

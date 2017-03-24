@@ -23,6 +23,9 @@ public class InkCollectible : MonoBehaviour {
                 case InkColor.Blue:
                     shootingScript.addBlueInk(number);
                     break;
+                case InkColor.Alpha:
+                    shootingScript.addAlphaInk(number);
+                    break;
             }
 
             Destroy(gameObject);

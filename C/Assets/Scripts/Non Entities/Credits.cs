@@ -4,8 +4,25 @@ using UnityEngine;
 
 public class Credits : MonoBehaviour {
 
-	void OnMouseDown()
+    public GameObject creditsPanel;
+
+    void OnMouseEnter()
     {
-        Debug.Log("Credits");
+        gameObject.transform.localScale += new Vector3(5f, 0, 0);
+    }
+
+    void OnMouseExit()
+    {
+        gameObject.transform.localScale -= new Vector3(5f, 0, 0);
+    }
+
+    /*void OnMouseDown()
+    {
+        //open credits panel
+    }*/
+
+    public void CreditsClicked()
+    {
+
     }
 }

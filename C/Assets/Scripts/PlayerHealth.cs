@@ -38,10 +38,9 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            currentHealth = maxHealth;
+            SceneManager.LoadScene(1);
         }
         UpdateDisplay();
-        //SceneManager.LoadScene(1);
     }
 
     //Update UI element

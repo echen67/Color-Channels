@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour {
+public class Laser : Colorable {
+
+    public InkColor laserColor = InkColor.Red;
 
     //CHANGE THIS SO THAT DAMAGE IS TAKEN EVERY FEW SECONDS OR SO
     public int damage = 1;
@@ -21,4 +23,6 @@ public class Laser : MonoBehaviour {
             enemyScript.TakeDamage(damage);
         }
     }
+
+
 }
