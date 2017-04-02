@@ -50,9 +50,9 @@ public class PlayerMovement : MonoBehaviour {
     float updateTime = 0;
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        /*if (Input.GetKeyDown(KeyCode.Escape)) {
             Application.Quit();
-        }
+        }*/
         absVelX = System.Math.Abs(body2D.velocity.x);
         absVelY = System.Math.Abs(body2D.velocity.y);
 

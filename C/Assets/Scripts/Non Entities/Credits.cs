@@ -6,7 +6,7 @@ public class Credits : MonoBehaviour {
 
     public GameObject creditsPanel;
 
-    void OnMouseEnter()
+    /*void OnMouseEnter()
     {
         gameObject.transform.localScale += new Vector3(5f, 0, 0);
     }
@@ -16,13 +16,15 @@ public class Credits : MonoBehaviour {
         gameObject.transform.localScale -= new Vector3(5f, 0, 0);
     }
 
-    /*void OnMouseDown()
+    void OnMouseDown()
     {
         //open credits panel
     }*/
 
     public void CreditsClicked()
     {
-
+        AudioSource audio = gameObject.GetComponent<AudioSource>();
+        audio.Play();
+        creditsPanel.SetActive(true);
     }
 }

@@ -25,4 +25,10 @@ public class XButton : MonoBehaviour {
     {
         gameObject.transform.localScale -= new Vector3(5f, 0, 0);
     }
+
+    public void CloseWindow()
+    {
+        GameObject parent = gameObject.transform.parent.gameObject;
+        parent.SetActive(false);
+    }
 }
