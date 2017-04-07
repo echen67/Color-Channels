@@ -32,4 +32,12 @@ public class Door : Entity {
                 SceneManager.LoadScene(SceneNum);
             }
     }
+
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Player" && unlock)
+        {
+            SceneManager.LoadScene(SceneNum);
+        }
+    }
 }

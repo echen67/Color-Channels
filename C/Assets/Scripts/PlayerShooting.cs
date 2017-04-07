@@ -29,10 +29,10 @@ public class PlayerShooting : MonoBehaviour {
     private Ink inkScript;
 
     //how many bottles of each ink color you have left
-    private int numRed = 10;
-    private int numGreen = 10;
-    private int numBlue = 10;
-    private int numAlpha = 10;
+    private int numRed = 0;
+    private int numGreen = 0;
+    private int numBlue = 0;
+    private int numAlpha = 0;
 
     public InkColor inkColor = InkColor.Red;
     private PlayerMovement playerMovementScript;

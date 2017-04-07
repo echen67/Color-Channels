@@ -52,18 +52,6 @@ public class DimensionsManager : MonoBehaviour {
         Physics2D.IgnoreLayerCollision(9, 11, true);
         Physics2D.IgnoreLayerCollision(10, 11, true);
     }
-
-	/*void Start () {
-        //temp
-        //start on red
-        cam.cullingMask = 127 | (1 << 8);
-        
-        Physics2D.IgnoreLayerCollision(0, 8, false);
-
-        Physics2D.IgnoreLayerCollision(0, 9, true);
-        Physics2D.IgnoreLayerCollision(0, 10, true);
-        Physics2D.IgnoreLayerCollision(0, 11, true);
-    }*/
 	
 	void Update () {
         isPaused = pauseScript.isPaused;
