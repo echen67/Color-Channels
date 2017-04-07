@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class Play : MonoBehaviour {
 
-    void OnMouseEnter()
+    /*void OnMouseEnter()
     {
         gameObject.transform.localScale += new Vector3(5f, 0, 0);
     }
@@ -17,7 +17,7 @@ public class Play : MonoBehaviour {
         gameObject.transform.localScale -= new Vector3(5f, 0, 0);
     }
 
-    /*void OnMouseDown()
+    void OnMouseDown()
     {
         SceneManager.LoadScene(1);
     }*/
@@ -26,6 +26,14 @@ public class Play : MonoBehaviour {
     {
         AudioSource audio = gameObject.GetComponent<AudioSource>();
         audio.Play();
+
+        StartCoroutine("Load");
+        //SceneManager.LoadScene(1);
+    }
+
+    IEnumerator Load()
+    {
+        yield return new WaitForSeconds(.3f);
         SceneManager.LoadScene(1);
     }
 }

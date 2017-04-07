@@ -9,8 +9,8 @@ public class Options : MonoBehaviour {
 
     private bool isOptionsOpen = false;
 
-    //temp, since buttons wont freaking work inside editor >:(
-    void Update()
+    //temp
+    /*void Update()
     {
         if (Input.GetKeyDown(KeyCode.O) && !isOptionsOpen)
         {
@@ -18,9 +18,9 @@ public class Options : MonoBehaviour {
             instance.transform.SetParent(canvas.transform, false);
             isOptionsOpen = true;
         }
-    }
+    }*/
 
-    void OnMouseEnter()
+    /*void OnMouseEnter()
     {
         gameObject.transform.localScale += new Vector3(5f, 0, 0);
     }
@@ -30,14 +30,17 @@ public class Options : MonoBehaviour {
         gameObject.transform.localScale -= new Vector3(5f, 0, 0);
     }
 
-    /*void OnMouseDown()
+    void OnMouseDown()
     {
-        //open options panel
+        GameObject instance = Instantiate(optionsPanel);
+        instance.transform.SetParent(canvas.transform, false);
+        isOptionsOpen = true;
     }*/
 
     public void OptionsClicked()
     {
-        Debug.Log("helloooo");
-        Instantiate(optionsPanel);
+        optionsPanel.SetActive(true);
+        AudioSource audio = gameObject.GetComponent<AudioSource>();
+        audio.Play();
     }
 }
