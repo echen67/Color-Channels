@@ -10,6 +10,17 @@ public class Laser : Colorable {
     public int damage = 1;
     public float period = 1;
 
+    void Start()
+    {
+        InkHit(laserColor);
+        setColor();
+    }
+
+    void Update()
+    {
+        setColor();
+    }
+
 	void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
