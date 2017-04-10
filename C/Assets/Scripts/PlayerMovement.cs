@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody2D body2D;
 
     private AudioSource jumpSound;
+    private bool lastStanding = false;
 
     void Awake()
     {
@@ -63,11 +64,31 @@ public class PlayerMovement : MonoBehaviour {
             animator.SetBool("doubleJump", false);
         }
 
+        lastStanding = standing;
         standing = absVelY <= standingThreshold;
-        if (standing)
+        if (standing && lastStanding)
         {
             doubleJump = 0;
         }
+
+        //The following is an incomplete fix for the infinite-jumping-under-platforms. There are two problems with it:
+        //First, I don't think groundLayer is correct; it should correspond to the player's layer. Fixing this should(?) fix the collision detection.
+        //Second, right now only the white platform (the one not listed under the "Platforms" category) is considered a platform. Either add the platform script to the other platforms (like what white currently has) or tag each individual platform with the "Platform" tag and replace FindObjectsOfType(typeof(Platform)) with FindGameObjectsWithTag("Platform").
+        //- Jacob
+
+        //Platform[] platforms = GameObject.FindObjectsOfType(typeof(Platform)) as Platform[];
+        //print(platforms.Length);
+        //foreach (Platform p in platforms)
+        //{
+        //    print(p);
+        //    if (Physics2D.OverlapCircle(p.transform.position, 0.15f, groundLayer))
+        //    {
+        //        print("hit");
+        //        standing = true;
+        //        doubleJump = 0;
+        //        break;
+        //    }
+        //}
 
         if (currentDirection != newDirection)
         {
