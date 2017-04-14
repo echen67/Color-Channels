@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: d46ab46617babb34281761a10f01eca8
+timeCreated: 1492186402
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Annie BTN
+  fontNames:
+  - Annie BTN
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
