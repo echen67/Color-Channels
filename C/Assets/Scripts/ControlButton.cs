@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlButton : MonoBehaviour {
+public class ControlButton : SFX {
 
     public GameObject controlPanel;
 
@@ -10,6 +10,7 @@ public class ControlButton : MonoBehaviour {
     {
         controlPanel.SetActive(true);
         AudioSource audio = gameObject.GetComponent<AudioSource>();
+        audio.volume = UpdateSfxVolume();
         audio.Play();
     }
 }

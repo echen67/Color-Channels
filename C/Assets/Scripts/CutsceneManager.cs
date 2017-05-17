@@ -18,6 +18,8 @@ public class CutsceneManager : MonoBehaviour {
     private bool startScene5 = false;
 
 	void Start () {
+        Time.timeScale = 1f;
+
         scene0 = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
         scene1 = gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>();
         scene2 = gameObject.transform.GetChild(2).GetComponent<SpriteRenderer>();

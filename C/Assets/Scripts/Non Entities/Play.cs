@@ -5,26 +5,17 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-public class Play : MonoBehaviour {
+public class Play : SFX {
 
-    /*void OnMouseEnter()
+    void Start()
     {
-        gameObject.transform.localScale += new Vector3(5f, 0, 0);
+        Time.timeScale = 1f;
     }
-
-    void OnMouseExit()
-    {
-        gameObject.transform.localScale -= new Vector3(5f, 0, 0);
-    }
-
-    void OnMouseDown()
-    {
-        SceneManager.LoadScene(1);
-    }*/
 
     public void PlayClicked()
     {
         AudioSource audio = gameObject.GetComponent<AudioSource>();
+        audio.volume = UpdateSfxVolume();
         audio.Play();
 
         StartCoroutine("Load");

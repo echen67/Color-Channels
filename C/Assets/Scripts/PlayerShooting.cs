@@ -58,6 +58,7 @@ public class PlayerShooting : MonoBehaviour {
         ShootInk();
 	}
 
+    //Check if player has enough ink of that color to shoot
     void ShootInk()
     {
         //FIX THIS SO THAT YOU ONLY NEED ONE BULLET PREFAB?
@@ -67,7 +68,28 @@ public class PlayerShooting : MonoBehaviour {
         {
             //instantiate ink according to player color
             GameObject inkPrefab = null;
-            switch(inkColor)
+            if (inkColor == InkColor.Red && numRed > 0)
+            {
+                inkPrefab = bulletPrefabRed;
+                numRed--;
+                ShootInk2(inkPrefab);
+            } else if (inkColor == InkColor.Green && numGreen > 0)
+            {
+                inkPrefab = bulletPrefabGreen;
+                numGreen--;
+                ShootInk2(inkPrefab);
+            } else if (inkColor == InkColor.Blue && numBlue > 0)
+            {
+                inkPrefab = bulletPrefabBlue;
+                numBlue--;
+                ShootInk2(inkPrefab);
+            } else if (inkColor == InkColor.Alpha && numAlpha > 0)
+            {
+                inkPrefab = bulletPrefabAlpha;
+                numAlpha--;
+                ShootInk2(inkPrefab);
+            }
+            /*switch(inkColor)
             {
                 case InkColor.Red:
                     inkPrefab = bulletPrefabRed;
@@ -87,25 +109,27 @@ public class PlayerShooting : MonoBehaviour {
                     break;
             }
             GameObject instance = Instantiate(inkPrefab, gameObject.transform.position, Quaternion.identity);
-
-            //GameObject instance = Instantiate(bulletPrefabRed, gameObject.transform.position, Quaternion.identity);
-            //inkScript = bulletPrefabRed.GetComponent<Ink>();
-            //inkScript.setInkColor(inkColor);
+            */
 
             UpdateInkDisplay();
+        }
+    }
 
-            //decide which way to fire ink based on player's current direction
-            //eventually we will replace this with shooting based on mouse clicks?
-            Rigidbody2D instanceR = instance.GetComponent<Rigidbody2D>();
-            bool currentDirection = playerMovementScript.getCurrentDirection();
-            if (currentDirection == false)
-            {
-                instanceR.AddForce(Vector2.left * shootingForce, ForceMode2D.Impulse);
-            }
-            else
-            {
-                instanceR.AddForce(Vector2.right * shootingForce, ForceMode2D.Impulse);
-            }
+    //Where you actually instantiate the bullet
+    void ShootInk2(GameObject inkPrefab)
+    {
+        GameObject instance = Instantiate(inkPrefab, gameObject.transform.position, Quaternion.identity);
+
+        //decide which way to fire ink based on player's current direction
+        Rigidbody2D instanceR = instance.GetComponent<Rigidbody2D>();
+        bool currentDirection = playerMovementScript.getCurrentDirection();
+        if (currentDirection == false)
+        {
+            instanceR.AddForce(Vector2.left * shootingForce, ForceMode2D.Impulse);
+        }
+        else
+        {
+            instanceR.AddForce(Vector2.right * shootingForce, ForceMode2D.Impulse);
         }
     }
 
