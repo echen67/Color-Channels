@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : SFX {
 
     // <summary>
     //    Affects how quickly the player slides on icy platforms. The higher
@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour {
     private AudioSource jumpSound;
     private bool lastStanding = false;
 
+    private DimensionsManager dimensionsScript;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -45,19 +47,40 @@ public class PlayerMovement : MonoBehaviour {
         body2D = gameObject.GetComponent<Rigidbody2D>();
         jumpSound = gameObject.GetComponent<AudioSource>();
         prevPos = transform.position;
+
+        dimensionsScript = GameObject.FindGameObjectWithTag("Dimensions").GetComponent<DimensionsManager>();
     }
 
     Vector2 prevPos;
     float updateTime = 0;
 	void Update () {
 
-        /*if (Input.GetKeyDown(KeyCode.Escape)) {
-            Application.Quit();
-        }*/
+        //Vector3 end = new Vector3(transform.position.x, transform.position.y - 1, 0);
+        //Debug.DrawLine(transform.position, end, Color.red);
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f);
+        if (hit.collider != null && (hit.collider.tag == "Platform" || hit.collider.tag == "Moving") 
+            && (hit.collider.gameObject.layer == dimensionsScript.playerLayer || hit.collider.gameObject.layer == 0))
+        {
+            standing = true;
+            if (hit.collider.tag == "Moving")
+            {
+                Debug.Log("moving platform");
+                gameObject.transform.SetParent(hit.transform);
+            } else
+            {
+                gameObject.transform.SetParent(null);
+                Debug.Log("unparent");
+            }
+        } else
+        {
+            standing = false;
+            gameObject.transform.SetParent(null);
+        }
+
         absVelX = System.Math.Abs(body2D.velocity.x);
         absVelY = System.Math.Abs(body2D.velocity.y);
 
-        //print(body2D.velocity.y);
         animator.SetBool("falling", body2D.velocity.y > 0.01 || body2D.velocity.y < -0.01);
         if (!animator.GetBool("falling")) {
             animator.SetBool("jump", false);
@@ -65,7 +88,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         lastStanding = standing;
-        standing = absVelY <= standingThreshold;
+        //standing = absVelY <= standingThreshold;
         if (standing && lastStanding)
         {
             doubleJump = 0;
@@ -172,6 +195,7 @@ public class PlayerMovement : MonoBehaviour {
                 jumping = true;
                 doubleJump++;
                 body2D.gravityScale = 3f;
+                jumpSound.volume = UpdateSfxVolume();
                 jumpSound.Play();
             }
         }

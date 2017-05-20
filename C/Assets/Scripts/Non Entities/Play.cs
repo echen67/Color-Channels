@@ -19,7 +19,6 @@ public class Play : SFX {
         audio.Play();
 
         StartCoroutine("Load");
-        //SceneManager.LoadScene(1);
     }
 
     IEnumerator Load()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DimensionsManager : MonoBehaviour {
+public class DimensionsManager : SFX {
 
     //Things that DimensionManager is responsible for:
     //Layer collisions
@@ -77,6 +77,7 @@ public class DimensionsManager : MonoBehaviour {
 
             healthBarTexture.color = new Color(0.6F, .1F, .1F);
 
+            channelSound.volume = UpdateSfxVolume();
             channelSound.Play();
         }
 
@@ -95,6 +96,7 @@ public class DimensionsManager : MonoBehaviour {
 
             healthBarTexture.color = new Color(0.1F, .6F, .1F);
 
+            channelSound.volume = UpdateSfxVolume();
             channelSound.Play();
         }
 
@@ -113,6 +115,7 @@ public class DimensionsManager : MonoBehaviour {
 
             healthBarTexture.color = new Color(0.1F, .1F, .6F);
 
+            channelSound.volume = UpdateSfxVolume();
             channelSound.Play();
         }
 
@@ -131,6 +134,7 @@ public class DimensionsManager : MonoBehaviour {
 
             healthBarTexture.color = new Color(0.5F, .5F, .5F);
 
+            channelSound.volume = UpdateSfxVolume();
             channelSound.Play();
         }
     }

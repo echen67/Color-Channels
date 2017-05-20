@@ -8,7 +8,7 @@ public class SFX : MonoBehaviour {
 
     //private float sfxVol = 1;
 
-	void Awake () {
+	void OnEnable () {
         soundScript = GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>();
 	}
 

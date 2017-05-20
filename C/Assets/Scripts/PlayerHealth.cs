@@ -15,10 +15,14 @@ public class PlayerHealth : MonoBehaviour
     private GameObject healthBar;
     private RectTransform healthBarTrans;
 
+    private Death deathScript;
+
     void OnEnable()
     {
         healthBar = GameObject.FindGameObjectWithTag("Health");
         healthBarTrans = healthBar.GetComponent<RectTransform>();
+
+        deathScript = GameObject.FindGameObjectWithTag("Death").GetComponent<Death>();
     }
 
     //Called by health pickups
@@ -38,7 +42,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(deathScript.getSceneNum());
         }
         UpdateDisplay();
     }

@@ -9,7 +9,12 @@ public class Spike : Colorable {
     private int health = 10;
     GameObject player;
 
+    SpriteRenderer outlineSR;
+
     void Start() {
+        outlineSR = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        setOutlineColor(spikeColor);
+
         player = GameObject.FindGameObjectWithTag("Player");
         InkHit(spikeColor);
         setColor();
@@ -42,6 +47,34 @@ public class Spike : Colorable {
             enemyScript.TakeDamage(damage);
             int takeDamage = enemyScript.getDamageModifier();
             health = health - takeDamage;
+        }
+    }
+
+    public override bool InkHit(InkColor inkColor)
+    {
+        base.InkHit(inkColor);
+        this.spikeColor = inkColor;
+        setColor();
+        setOutlineColor(inkColor);
+        return base.InkHit(inkColor);
+    }
+
+    void setOutlineColor(InkColor input)
+    {
+        switch (input)
+        {
+            case InkColor.Red:
+                outlineSR.color = new Color(0.7F, 0F, 0F, 0.5F);
+                break;
+            case InkColor.Green:
+                outlineSR.color = new Color(0F, 0.7F, 0F, 0.5F);
+                break;
+            case InkColor.Blue:
+                outlineSR.color = new Color(0F, 0F, 0.7F, 0.5F);
+                break;
+            case InkColor.Alpha:
+                outlineSR.color = new Color(0.9F, 0.9F, 0.9F, 0.5F);
+                break;
         }
     }
 }
